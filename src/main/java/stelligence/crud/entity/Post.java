@@ -1,9 +1,6 @@
 package stelligence.crud.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,6 +9,8 @@ import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -29,6 +28,9 @@ public class Post extends BaseEntity{
     private String content;
 
     private boolean isDeleted;
+
+    @OneToMany
+    private List<Comment> comments = new ArrayList<>();
 
     public Post(String title, String content) {
         this.title = title;

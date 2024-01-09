@@ -27,7 +27,7 @@ public class PostService {
         Post post = new Post(postRequestDto.getTitle(), postRequestDto.getContent());
         Post savedPost = postRepository.save(post);
 
-        return new PostResponseDto(savedPost.getId(), savedPost.getTitle(), savedPost.getContent());
+        return new PostResponseDto(savedPost.getId(), savedPost.getTitle(), savedPost.getContent(), post.getComments(), post.getCreatedDate(), post.getLastModifiedDate());
     }
 
     //삭제
@@ -55,7 +55,7 @@ public class PostService {
             throw new IllegalArgumentException("이미 삭제된 게시글입니다.");
         }
         Post updated = post.update(content);
-        return new PostResponseDto(updated.getId(), updated.getTitle(), updated.getContent());
+        return new PostResponseDto(updated.getId(), updated.getTitle(), updated.getContent(), post.getComments(), post.getCreatedDate(), post.getLastModifiedDate());
     }
 
     //단건조회
@@ -69,7 +69,7 @@ public class PostService {
             throw new IllegalArgumentException("이미 삭제된 게시글입니다.");
         }
 
-        return new PostResponseDto(post.getId(), post.getTitle(), post.getContent());
+        return new PostResponseDto(post.getId(), post.getTitle(), post.getContent(), post.getComments(), post.getCreatedDate(), post.getLastModifiedDate());
     }
 
     //목록조회
