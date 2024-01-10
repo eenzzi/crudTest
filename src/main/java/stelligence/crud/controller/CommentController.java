@@ -1,10 +1,8 @@
 package stelligence.crud.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import stelligence.crud.dto.CommentContentRequestDto;
 import stelligence.crud.dto.CommentRequestDto;
 import stelligence.crud.dto.CommentResponseDto;
 import stelligence.crud.dto.PostResponseDto;
@@ -22,4 +20,13 @@ public class CommentController {
     public PostResponseDto save(@RequestBody CommentRequestDto commentRequestDto) {
         return commentService.save(commentRequestDto);
     }
+
+    //수정
+    @PatchMapping("/{id}")
+    public PostResponseDto update(@PathVariable Long id, @RequestBody CommentContentRequestDto commentContentRequestDto) {
+        return commentService.update(id, commentContentRequestDto);
+    }
+
+
+    //삭제
 }

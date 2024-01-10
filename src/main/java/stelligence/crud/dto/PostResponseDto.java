@@ -18,7 +18,7 @@ public class PostResponseDto {
     private String title;
     private String content;
 
-    private List<Comment> comments = new ArrayList<>();
+    private List<CommentResponseDto> comments = new ArrayList<>();
     private LocalDateTime createdDate;
     private LocalDateTime lastModifiedDate;
 }

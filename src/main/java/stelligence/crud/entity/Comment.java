@@ -28,4 +28,9 @@ public class Comment extends BaseEntity{
         this.isDeleted = false;
         this.post = post;
     }
+
+    public Comment update(String content) {
+        this.content = content;
+        return this;
+    }
 }
