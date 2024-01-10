@@ -4,11 +4,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
 
 @Entity
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
+@SQLDelete(sql = "UPDATE comment SET is_deleted = true WHERE id = ?")
 public class Comment extends BaseEntity{
 
     @Id
