@@ -42,6 +42,7 @@ public class PostService {
 //        }
 //        return list;
         postRepository.deleteById(id);
+
         return findAll();
     }
 

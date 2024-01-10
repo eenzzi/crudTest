@@ -29,7 +29,7 @@ public class Post extends BaseEntity{
 
     private boolean isDeleted;
 
-    @OneToMany
+    @OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE)
     private List<Comment> comments = new ArrayList<>();
 
     public Post(String title, String content) {
