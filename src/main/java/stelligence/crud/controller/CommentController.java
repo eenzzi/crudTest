@@ -6,6 +6,7 @@ import stelligence.crud.dto.CommentContentRequestDto;
 import stelligence.crud.dto.CommentRequestDto;
 import stelligence.crud.dto.CommentResponseDto;
 import stelligence.crud.dto.PostResponseDto;
+import stelligence.crud.entity.Post;
 import stelligence.crud.service.CommentService;
 
 @RestController
@@ -29,4 +30,8 @@ public class CommentController {
 
 
     //삭제
+    @DeleteMapping("/{id}")
+    public PostResponseDto delete(@PathVariable Long id) {
+        return commentService.delete(id);
+    }
 }
