@@ -35,15 +35,14 @@ public class Comment extends BaseEntity {
 		this.content = content;
 		this.isDeleted = false;
 		this.post = post;
+		post.getComments().add(this); //자동으로 post에 comment 추가
 	}
 
-	public Comment update(String content) {
+	public void update(String content) {
 		this.content = content;
-		return this;
 	}
 
-	public Comment delete() {
+	public void delete() {
 		this.isDeleted = true;
-		return this;
 	}
 }

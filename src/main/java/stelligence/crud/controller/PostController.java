@@ -2,6 +2,7 @@ package stelligence.crud.controller;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -42,8 +43,8 @@ public class PostController {
 
 	//목록조회
 	@GetMapping
-	public List<PostListResponseDto> findAll() {
-		return postService.findAll();
+	public List<PostListResponseDto> findAll(Pageable pageable) {
+		return postService.findAll(pageable);
 	}
 
 	//수정
@@ -54,7 +55,9 @@ public class PostController {
 
 	//삭제
 	@DeleteMapping("/{id}")
-	public List<PostListResponseDto> delete(@PathVariable Long id) {
-		return postService.delete(id);
+	public String delete(@PathVariable Long id) {
+		postService.delete(id);
+		return "success";
 	}
+
 }

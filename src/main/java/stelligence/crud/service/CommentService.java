@@ -29,7 +29,7 @@ public class CommentService {
 		);
 		Comment comment = new Comment(commentRequestDto.getContent(), post);
 		commentRepository.save(comment); //comment repo에 comment 추가
-		post.getComments().add(comment); //post에도 comment 추가
+		// post.getComments().add(comment); //post에도 comment 추가
 
 		return PostResponseDto.from(post);
 

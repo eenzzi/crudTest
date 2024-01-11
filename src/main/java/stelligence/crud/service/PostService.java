@@ -2,10 +2,12 @@ package stelligence.crud.service;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import stelligence.crud.dto.PostContentRequestDto;
 import stelligence.crud.dto.PostListResponseDto;
 import stelligence.crud.dto.PostRequestDto;
@@ -13,6 +15,7 @@ import stelligence.crud.dto.PostResponseDto;
 import stelligence.crud.entity.Post;
 import stelligence.crud.repository.PostRepository;
 
+@Slf4j
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -29,7 +32,7 @@ public class PostService {
 	}
 
 	//삭제
-	public List<PostListResponseDto> delete(Long id) {
+	public void delete(Long id) {
 		//        Post post = postRepository.findById(id).orElseThrow(
 		//                () -> new IllegalArgumentException("해당 게시글이 없습니다. id=" + id)
 		//        );
@@ -41,8 +44,8 @@ public class PostService {
 		//        }
 		//        return list;
 		postRepository.deleteById(id); //주어진 id를 db에서 삭제
-
-		return findAll();
+		//
+		// return findAll(null);
 	}
 
 	//수정
@@ -75,7 +78,7 @@ public class PostService {
 
 	//목록조회
 	@Transactional(readOnly = true)
-	public List<PostListResponseDto> findAll() {
+	public List<PostListResponseDto> findAll(Pageable pageable) {
 		//        List<Post> postList = postRepository.findAll();
 		//        List<PostListResponseDto> list = new LinkedList<>();
 		//        for (Post post : postList) {
@@ -86,10 +89,11 @@ public class PostService {
 		//            list.add(postListResponseDto);
 		//        }
 		//        return list;
-		return postRepository.findAll()
+		return postRepository.findAllWithoutDelete(pageable)
 			.stream()
 			.filter(post -> !post.isDeleted()) //isDeleted가 false가 아닌 것만 필터링
 			.map(PostListResponseDto::from) //PostListResponseDto의 from 메서드를 각 스트림에 적용
 			.toList(); //다시 리스트로
 	}
+
 }
