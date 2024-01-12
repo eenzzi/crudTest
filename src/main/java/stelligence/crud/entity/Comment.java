@@ -45,4 +45,5 @@ public class Comment extends BaseEntity {
 	public void delete() {
 		this.isDeleted = true;
 	}
+
 }
